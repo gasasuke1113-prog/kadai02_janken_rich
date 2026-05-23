@@ -1,0 +1,252 @@
+/* ==========================================
+   全体の基本設定
+   ========================================== */
+body {
+    background-color: #1e3d2f; /* 甲子園の蔦やスタンドをイメージした深い緑 */
+    color: #fff;
+    font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* ゲームの枠組み（黒土のイメージ） */
+.game-container {
+    background-color: #4a3b32;
+    border: 6px solid #2d221a;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+}
+
+header h1 {
+    text-align: center;
+    color: #f1c40f; /* 栄冠のゴールド */
+    font-size: 1.8rem;
+    margin-top: 0;
+    text-shadow: 2px 2px 0px #000;
+}
+
+/* ==========================================
+   スコアボード（電光掲示板風）
+   ========================================== */
+.scoreboard {
+    background-color: #0b1712;
+    border: 3px solid #7f8c8d;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.inning-display {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #00ffcc; /* 電光掲示板のネオン風グリーン */
+    font-weight: bold;
+    border-bottom: 2px solid #1e3d2f;
+    padding-bottom: 5px;
+    margin-bottom: 12px;
+}
+
+.teams {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.team {
+    width: 46%;
+    text-align: center;
+    padding: 8px;
+    background-color: #12241c;
+    border-radius: 4px;
+    border: 2px solid transparent;
+}
+
+/* 現在攻撃中のチームを光らせるスタイル */
+.team.active {
+    border-color: #00ffcc;
+    box-shadow: 0 0 8px #00ffcc;
+}
+
+.team-name {
+    font-size: 0.85rem;
+    color: #a0a0a0;
+    margin-bottom: 4px;
+}
+
+.money {
+    font-size: 1.3rem;
+    color: #ffeb3b; /* 通常時は黄色 */
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+/* 【追加】借金（マイナス）になった時の赤文字スタイル */
+.money.debt {
+    color: #ff4d4d !important; /* 強制的に明るい赤色にする */
+    text-shadow: 0 0 5px rgba(255,77,77,0.5);
+}
+
+.status-box {
+    text-align: center;
+    background-color: #08100c;
+    padding: 6px;
+    border-radius: 4px;
+}
+
+.current-turn {
+    font-size: 1rem;
+    color: #ffffff;
+}
+
+.streak {
+    font-size: 0.95rem;
+    color: #ff5722;
+    font-weight: bold;
+    margin-top: 2px;
+}
+
+/* ==========================================
+   グラウンド（試合実況・手牌・吹き出し）
+   ========================================== */
+.field {
+    background-color: #27ae60; /* 鮮やかな芝生の緑 */
+    border: 4px solid #fff;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.result-log {
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 6px 12px;
+    border-radius: 4px;
+    width: 90%;
+}
+
+/* 煽り吹き出しの見た目 */
+.bubble {
+    color: #fff;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 3px solid #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    text-align: center;
+    display: none;
+    margin: 10px 0;
+    font-size: 0.95rem;
+    position: relative;
+    max-width: 85%;
+    animation: pop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -11px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 12px 12px 0;
+    border-style: solid;
+    display: block;
+    width: 0;
+}
+
+/* あなたが煽る時の色（青） */
+.bubble.player-taunt { background-color: #2980b9; }
+.bubble.player-taunt::after { border-color: #2980b9 transparent; }
+
+/* NPCが煽る時の色（赤） */
+.bubble.npc-taunt { background-color: #c0392b; }
+.bubble.npc-taunt::after { border-color: #c0392b transparent; }
+
+@keyframes pop {
+    0% { transform: scale(0.6); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.hands-display {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.hand-box {
+    text-align: center;
+}
+
+.hand-label {
+    font-size: 0.8rem;
+    display: block;
+    color: #eee;
+}
+
+.hand-icon {
+    font-size: 2.2rem;
+    margin-top: 5px;
+    background: rgba(255, 255, 255, 0.15);
+    width: 55px;
+    height: 55px;
+    line-height: 55px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+/* ==========================================
+   操作ボタン
+   ========================================== */
+.controls {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 15px;
+}
+
+.btn {
+    background-color: #d35400; /* レンガ（土）色 */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px #a04000;
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.btn:active {
+    box-shadow: 0 1px #a04000;
+    transform: translateY(3px);
+}
+
+.btn:disabled {
+    background-color: #7f8c8d;
+    box-shadow: 0 4px #95a5a6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.restart-container {
+    text-align: center;
+}
+
+.reset-btn {
+    background-color: #2980b9;
+    box-shadow: 0 4px #1f618d;
+}
