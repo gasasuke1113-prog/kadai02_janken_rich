@@ -1,11 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>じゃんけん甲子園</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="game-container">
+        <header>
+            <h1>⚾ じゃんけん甲子園 ⚾</h1>
+        </header>
+
+        <div class="scoreboard">
+            <div class="inning-display" id="inning">試合前</div>
+            
+            <div class="teams">
+                <div class="team player1" id="team-p1">
+                    <div class="team-name" id="p1-team-label">あなた</div>
+                    <div class="money" id="p1-money">30,000円</div>
+                </div>
+                <div class="team player2" id="team-p2">
+                    <div class="team-name" id="p2-team-label">NPC</div>
+                    <div class="money" id="p2-money">30,000円</div>
+                </div>
+            </div>
+            
+            <div class="status-box">
+                <div class="current-turn" id="current-turn">先攻後攻を決めます！</div>
+                <div class="streak" id="streak-display">連続勝利: 0回</div>
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="result-log" id="result-log">まずはじゃんけんで先攻・後攻を決めよう！</div>
+            
+            <div class="bubble" id="taunt-bubble"></div>
+
+            <div class="hands-display">
+                <div class="hand-box">
+                    <span class="hand-label" id="left-hand-label">あなた</span>
+                    <div class="hand-icon" id="left-hand">-</div>
+                </div>
+                <div class="hand-box">
+                    <span class="hand-label" id="right-hand-label">NPC</span>
+                    <div class="hand-icon" id="right-hand">-</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn" onclick="handleUserChoice('goo')">✊ グー</button>
+            <button class="btn" onclick="handleUserChoice('choki')">✌️ チョキ</button>
+            <button class="btn" onclick="handleUserChoice('par')">🖐️ パー</button>
+        </div>
+        
+        <div class="restart-container">
+            <button class="btn reset-btn" id="reset-btn" onclick="resetGame()" style="display:none;">もう一度プレイする</button>
+        </div>
+    </div>
     
+    <script src="script.js"></script>
 </body>
 </html>
